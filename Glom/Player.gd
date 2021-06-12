@@ -1,7 +1,7 @@
 extends Node2D
 
 export (NodePath) var prev_collider
-export var size = 1
+export var size = 1.0
 var next_collider
 var readied = true
 var stuck = false
