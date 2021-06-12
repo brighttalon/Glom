@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://MainBody.gd" type="Script" id=2]
+[ext_resource path="res://TetherHitbox.gd" type="Script" id=3]
+[ext_resource path="res://Projectile.gd" type="Script" id=4]
+[ext_resource path="res://MainBodyHitbox.gd" type="Script" id=5]
+[ext_resource path="res://ProjectileHitbox.gd" type="Script" id=6]
+[ext_resource path="res://Spring.gd" type="Script" id=7]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="Player" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MainBody" type="KinematicBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="MainBodyHitbox" type="CollisionShape2D" parent="MainBody"]
+shape = SubResource( 1 )
+script = ExtResource( 5 )
+
+[node name="Projectile" type="RigidBody2D" parent="."]
+contacts_reported = 2
+contact_monitor = true
+script = ExtResource( 4 )
+
+[node name="ProjectileHitbox" type="CollisionShape2D" parent="Projectile"]
+shape = SubResource( 2 )
+script = ExtResource( 6 )
+
+[node name="Tether" type="Area2D" parent="."]
+
+[node name="TetherHitbox" type="CollisionPolygon2D" parent="Tether"]
+script = ExtResource( 3 )
+
+[node name="Spring" type="DampedSpringJoint2D" parent="."]
+node_a = NodePath("../MainBody")
+node_b = NodePath("../Projectile")
+length = 1.0
+stiffness = 5.0
+damping = 0.01
+script = ExtResource( 7 )
