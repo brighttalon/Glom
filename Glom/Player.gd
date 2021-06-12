@@ -1,8 +1,8 @@
 extends Node2D
 
 export (NodePath) var prev_collider
+export var size = 1
 var next_collider
-var size = 1
 var readied = true
 var stuck = false
 var _player_scene
